@@ -7,6 +7,7 @@
 # twisted code is imported.
 import asyncio
 import sys
+import pdb
 
 import twisted.internet
 from twisted.internet import asyncioreactor
@@ -93,4 +94,5 @@ def runService(service):
 
 def run():
     """Run the maas-rackd service."""
+    pdb.set_trace()
     runService('maas-rackd')
