@@ -137,7 +137,7 @@ except:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'maasdb',
             'USER': 'maas',
-            'PASSWORD': '',
+            # 'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': 5432,
             'CONN_MAX_AGE': 300,
