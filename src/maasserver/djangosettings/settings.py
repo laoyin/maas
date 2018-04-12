@@ -149,6 +149,7 @@ except:
         # For debug queries to work debug most also be on, so Django will
         # track the queries made.
     DEBUG = True
+    DEBUG_QUERIES = False
 
     # The regiond.conf will attempt to be loaded when the 'maas' command
     # is read by a standard user. We allow this to fail and miss configure the
