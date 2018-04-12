@@ -118,7 +118,7 @@ try:
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
                 'NAME': config.database_name,
                 'USER': config.database_user,
-                'PASSWORD': config.database_pass,
+                # 'PASSWORD': config.database_pass,
                 'HOST': config.database_host,
                 'PORT': str(config.database_port),
                 'CONN_MAX_AGE': config.database_conn_max_age,
