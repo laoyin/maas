@@ -131,11 +131,30 @@ try:
             # track the queries made.
             DEBUG = True
 except:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'maasdb',
+            'USER': 'maas',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': 5432,
+            'CONN_MAX_AGE': 300,
+        }
+    }
+    DEBUG = config.debug
+    DEBUG_QUERIES = config.debug_queries
+    if DEBUG_QUERIES and not DEBUG:
+        # For debug queries to work debug most also be on, so Django will
+        # track the queries made.
+        DEBUG = True
+
     # The regiond.conf will attempt to be loaded when the 'maas' command
     # is read by a standard user. We allow this to fail and miss configure the
     # database information. Django will still complain since no 'default'
     # connection is defined.
-    DATABASES = {}
+    # DATABASES = {}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
