@@ -143,12 +143,12 @@ except:
             'CONN_MAX_AGE': 300,
         }
     }
-    DEBUG = config.debug
-    DEBUG_QUERIES = config.debug_queries
-    if DEBUG_QUERIES and not DEBUG:
+    # DEBUG = config.debug
+    # DEBUG_QUERIES = config.debug_queries
+    # if DEBUG_QUERIES and not DEBUG:
         # For debug queries to work debug most also be on, so Django will
         # track the queries made.
-        DEBUG = True
+    DEBUG = True
 
     # The regiond.conf will attempt to be loaded when the 'maas' command
     # is read by a standard user. We allow this to fail and miss configure the
