@@ -7,6 +7,7 @@ import argparse
 import os
 import signal
 import sys
+import pdb
 
 # Set the default so on installed system running regiond directly just works.
 os.environ.setdefault(
@@ -50,6 +51,7 @@ def run():
 
     Spawns children workers up to the number of CPU's minimum is 4 workers.
     """
+    pdb.set_trace()
     args = parse()
 
     # Remove all the command line arguments, so they don't interfere with
@@ -87,3 +89,7 @@ def run():
 
     # Start the master services, which will spawn the required workers.
     runMasterServices()
+
+
+if __name__ == "__main__":
+    run()
