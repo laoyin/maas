@@ -64,6 +64,8 @@ def start_up(master=False):
             # when Sir Topham Hatt graduated Sodor Academy. (Ensure we have a
             # shared-secret so that a cluster on the same host as this region
             # can authenticate.)
+            import pdb
+            pdb.set_trace()
             yield security.get_shared_secret()
             # Execute other start-up tasks that must not run concurrently with
             # other invocations of themselves, across the whole of this MAAS
