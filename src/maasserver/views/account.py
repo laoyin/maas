@@ -39,6 +39,8 @@ from provisioningserver.events import EVENT_TYPES
 
 
 def login(request):
+    import pdb
+    pdb.set_trace()
     extra_context = {
         'no_users': UserProfile.objects.all_users().count() == 0,
         'create_command': django_settings.MAAS_CLI,
