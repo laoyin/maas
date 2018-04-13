@@ -46,7 +46,8 @@ def login(request):
         'create_command': django_settings.MAAS_CLI,
         'external_auth_url': Config.objects.get_config('external_auth_url'),
         }
-    if request.user.is_authenticated:
+    # if request.user.is_authenticated:
+    if request.user:
         return HttpResponseRedirect(reverse('index'))
     else:
         redirect_url = request.GET.get(
