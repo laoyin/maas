@@ -94,5 +94,8 @@ def runService(service):
 
 def run():
     """Run the maas-rackd service."""
-    pdb.set_trace()
     runService('maas-rackd')
+
+
+if __name__ == "__main__":
+    run()
