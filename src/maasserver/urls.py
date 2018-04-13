@@ -159,8 +159,8 @@ urlpatterns += [
 
 # API URLs. If old API requested, provide error message directing to new API.
 urlpatterns += [
-    # url(r'^api/2\.0/', include(urls_api)),
-    url(r'^maas_api/2\.0/', include(ucmp_urls)),
+    url(r'^api/2\.0/', include(urls_api)),
+    # url(r'^maas_api/2\.0/', include(ucmp_urls)),
     url(r'^api/version/', lambda request: HttpResponse(
         content='2.0', content_type="text/plain"), name='api_version'),
     url(r'^api/1.0/', lambda request: HttpResponse(
