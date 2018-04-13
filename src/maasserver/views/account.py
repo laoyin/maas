@@ -40,14 +40,14 @@ from provisioningserver.events import EVENT_TYPES
 
 def login(request):
     import pdb
-    pdb.set_trace()
+    #pdb.set_trace()
     extra_context = {
         'no_users': UserProfile.objects.all_users().count() == 0,
         'create_command': django_settings.MAAS_CLI,
         'external_auth_url': Config.objects.get_config('external_auth_url'),
         }
-    # if request.user.is_authenticated:
-    if request.user:
+    if request.user.is_authenticated:
+    #if request.user:
         return HttpResponseRedirect(reverse('index'))
     else:
         redirect_url = request.GET.get(
