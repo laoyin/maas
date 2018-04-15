@@ -361,6 +361,13 @@ class RegionEventLoop:
         },
     }
 
+    factories = {
+        "web": {
+            "only_on_master": False,
+            "factory": make_WebApplicationService,
+            "requires": ["postgres-listener-worker", "status-worker"],
+        }
+    }
     def __init__(self):
         super(RegionEventLoop, self).__init__()
         self.services = MAASServices(self)
