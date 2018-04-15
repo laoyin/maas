@@ -51,7 +51,6 @@ def run():
 
     Spawns children workers up to the number of CPU's minimum is 4 workers.
     """
-    pdb.set_trace()
     args = parse()
 
     # Remove all the command line arguments, so they don't interfere with
