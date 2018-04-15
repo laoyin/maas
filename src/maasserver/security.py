@@ -93,8 +93,6 @@ def get_shared_secret_txn():
     secret_on_fs = get_shared_secret_from_filesystem()
 
     if secret_in_db is None and secret_on_fs is None:
-        import pdb
-        pdb.set_trace()
         secret = os.urandom(16)  # 16-bytes of crypto-standard noise.
         Config.objects.set_config("rpc_shared_secret", to_hex(secret))
         set_shared_secret_on_filesystem(secret)
