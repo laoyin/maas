@@ -13,6 +13,8 @@ def main():
     # main()
     os.environ.setdefault(
         "DJANGO_SETTINGS_MODULE", "maasserver.djangosettings.settings")
+    os.environ.setdefault(
+        "/snap/bin/rackd_server_start.py", "/home/pan/qinyun/maas/src/rackd_server_start.py")
     from maasserver.server import run
     run()
 
