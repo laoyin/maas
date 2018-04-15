@@ -192,4 +192,7 @@ def load_builtin_scripts():
                     raise Exception("%s: %s" % (script.name, form.errors))
                 script_in_db = form.save(commit=False)
                 script_in_db.default = True
+                # fix bug  by  yxp
+                if script_in_db.time_out is None:
+                    script_in_db.time_out = 0
                 script_in_db.save()
