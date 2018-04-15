@@ -361,13 +361,30 @@ class RegionEventLoop:
         },
     }
 
+
     factories = {
+        "postgres-listener-worker": {
+            "only_on_master": False,
+            "factory": make_PostgresListenerService,
+            "requires": [],
+        },
         "web": {
             "only_on_master": False,
             "factory": make_WebApplicationService,
             "requires": ["postgres-listener-worker", "status-worker"],
-        }
+        },
+        "status-worker": {
+            "only_on_master": False,
+            "factory": make_StatusWorkerService,
+            "requires": ["database-tasks"],
+        },
+        "database-tasks": {
+            "only_on_master": False,
+            "factory": make_DatabaseTaskService,
+            "requires": [],
+        },
     }
+
     def __init__(self):
         super(RegionEventLoop, self).__init__()
         self.services = MAASServices(self)
