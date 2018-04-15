@@ -6,6 +6,7 @@
 #from maasserver.server import run
 import pdb
 import os
+from maasserver.monkey import fix_django_big_auto_field
 
 
 def main():
@@ -16,6 +17,8 @@ def main():
     os.environ.setdefault(
         "/snap/bin/rackd_server_start.py", "/home/pan/qinyun/maas/src/rackd_server_start.py")
     from maasserver.server import run
+    # fix django version problem
+    fix_django_big_auto_field()
     run()
 
 if __name__ == "__main__":
