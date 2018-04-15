@@ -80,7 +80,6 @@ def runService(service):
     args = [
         '--logger=provisioningserver.logger.EventLogger',
         '--nodaemon', '--pidfile=',
-        'service=maas-rackd'
     ]
     args += sys.argv[1:]
     args += [service]
