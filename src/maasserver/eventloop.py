@@ -383,6 +383,16 @@ class RegionEventLoop:
             "factory": make_DatabaseTaskService,
             "requires": [],
         },
+        "rpc": {
+            "only_on_master": False,
+            "factory": make_RegionService,
+            "requires": ["rpc-advertise"],
+        },
+        "rpc-advertise": {
+            "only_on_master": False,
+            "factory": make_RegionAdvertisingService,
+            "requires": [],
+        },
     }
 
     def __init__(self):
