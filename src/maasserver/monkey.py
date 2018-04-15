@@ -84,13 +84,15 @@ def add_patches():
 # author:yxp
 
 def fix_django_big_auto_field():
-    from django.db import models as django_models
+    import django.db.models
     # from django.db import connection
     from django.utils.translation import ugettext_lazy as _
-    class BigAutoField(django_models.AutoField):
+    class BigAutoField(django.db.models.AutoField):
         description = _("Big (8 byte) integer")
         def get_internal_type(self):
             return "BigAutoField"
         def rel_db_type(self, connection):
-            return django_models.BigIntegerField().db_type(connection=connection)
-    setattr(django_models, "BigAutoField", BigAutoField)
+            return django.db.models.BigIntegerField().db_type(connection=connection)
+
+    django.db.models.BigAutoField = BigAutoField
+    # setattr(django_models, "BigAutoField", BigAutoField)
