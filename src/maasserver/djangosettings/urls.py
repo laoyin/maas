@@ -17,6 +17,8 @@ from django.views.static import serve as static_serve
 urlpatterns = [
     url(r'^', include('maasserver.urls')),
     url(r'^metadata/', include('metadataserver.urls')),
+    url(r'^webserver/', include('web_server.urls')),
+
 ]
 
 if settings.STATIC_LOCAL_SERVE:
