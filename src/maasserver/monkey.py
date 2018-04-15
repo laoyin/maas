@@ -69,12 +69,14 @@ def fix_piston_consumer_delete():
 
 
 def add_patches():
+    # yxp add need test
+    fix_django_big_auto_field()
+    # native 
     add_patches_to_twisted()
     fix_django_http_request()
     fix_piston_emitter_related()
     fix_piston_consumer_delete()
-    # yxp add need test
-    fix_django_big_auto_field()
+
 
 
 
@@ -85,7 +87,6 @@ def fix_django_big_auto_field():
     from django.db import models as django_models
     # from django.db import connection
     from django.utils.translation import ugettext_lazy as _
-
     class BigAutoField(django_models.AutoField):
         description = _("Big (8 byte) integer")
         def get_internal_type(self):
