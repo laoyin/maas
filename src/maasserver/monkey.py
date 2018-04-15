@@ -73,3 +73,24 @@ def add_patches():
     fix_django_http_request()
     fix_piston_emitter_related()
     fix_piston_consumer_delete()
+    # yxp add need test
+    fix_django_big_auto_field()
+
+
+
+# fix django version problem
+# author:yxp
+
+def fix_django_big_auto_field():
+    from django.db import models as django_models
+    # from django.db import connection
+
+    class BigAutoField(django_models.AutoField):
+        description = _("Big (8 byte) integer")
+
+        def get_internal_type(self):
+            return "BigAutoField"
+
+        def rel_db_type(self, connection):
+            return django_models.BigIntegerField().db_type(connection=connection)
+    setattr(django_models, "BigAutoField", BigAutoField)
