@@ -5,12 +5,16 @@
 #from provisioningserver.server import run
 #from maasserver.server import run
 import pdb
+import os
 
 
-def run():
-    from provisioningserver.__main__ import main
-    main()
-
+def main():
+    # from provisioningserver.__main__ import main
+    # main()
+    os.environ.setdefault(
+        "DJANGO_SETTINGS_MODULE", "maasserver.djangosettings.settings")
+    from maasserver.server import run
+    run()
 
 if __name__ == "__main__":
-    run()
+    main()
