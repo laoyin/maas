@@ -61,6 +61,7 @@ RETRY_AFTER_SERVICE_UNAVAILABLE = 10
 SIMPLESTREAMS_URL_PREFIX = '/images-stream/'
 
 PUBLIC_URL_PREFIXES = [
+    reverse('webserver'),
     # Login page: must be visible to anonymous users.
     reverse('login'),
     # Authentication: must be visible to anonymous users.
