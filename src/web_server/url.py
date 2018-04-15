@@ -29,6 +29,10 @@ from web_server.api.support import (
     RestrictedResource,
 )
 
+from web_server.api.test import (
+    TestHandler
+)
+
 
 
 device_handler = RestrictedResource(DeviceHandler, authentication=api_auth)
@@ -41,6 +45,8 @@ discovery_handler = RestrictedResource(
     DiscoveryHandler, authentication=api_auth)
 discoveries_handler = RestrictedResource(
     DiscoveriesHandler, authentication=api_auth)
+
+test_heandler = OperationsResource(TestHandler)
 
 # API URLs accessible to anonymous users.
 # urlpatterns = [
@@ -68,6 +74,14 @@ urlpatterns = [
         discovery_handler, name='discovery_handler'),
 ]
 
+
+
+# API urls for yxp test/
+
+urlpatterns +=[
+    url(r'^test/$', test_heandler, name='test_handler'),
+
+]
 
 # API URLs for admin users.
 # urlpatterns += [
