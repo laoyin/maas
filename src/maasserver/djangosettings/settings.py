@@ -324,6 +324,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'maasserver',
     'metadataserver',
+    'web_server',
     'piston3',
 )
 
