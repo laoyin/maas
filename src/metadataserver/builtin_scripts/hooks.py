@@ -339,8 +339,11 @@ def parse_cpuinfo(node, output, exit_status):
                 node.hostname, exit_status))
         return
     assert isinstance(output, bytes)
-    output = output.decode('ascii')
-
+    print(output)
+    print('yxp fix')
+    # output = output.decode('ascii')
+    # @test-yxp
+    output = output.decode('ascii', errors='replace')
     cpu_count = len(
         re.findall(
             '^(?P<CPU>\d+),(?P<CORE>\d+),(?P<SOCKET>\d+)$',
