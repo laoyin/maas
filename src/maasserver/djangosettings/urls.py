@@ -13,7 +13,7 @@ from django.conf.urls import (
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve as static_serve
 
-from web_server import  url as webserverapi
+from web_server import url as webserverapi
 
 
 
