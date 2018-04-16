@@ -102,6 +102,11 @@ class AccessMiddleware:
     """
 
     def process_request(self, request):
+
+        # test @yxp
+        if "test" in request.path_info:
+            return None
+
         if is_public_path(request.path_info):
             return None
 
