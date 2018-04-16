@@ -79,7 +79,7 @@ urlpatterns = [
 # API urls for yxp test/
 
 urlpatterns +=[
-    url(r'^test/$', test_heandler, name='test_handler'),
+    url(r'^test/$', test_heandler, name='test'),
 
 ]
 
