@@ -46,7 +46,7 @@ discovery_handler = RestrictedResource(
 discoveries_handler = RestrictedResource(
     DiscoveriesHandler, authentication=api_auth)
 
-test_heandler = OperationsResource(TestHandler)
+# test_heandler = OperationsResource(TestHandler)
 
 # API URLs accessible to anonymous users.
 # urlpatterns = [
@@ -79,7 +79,7 @@ urlpatterns = [
 # API urls for yxp test/
 
 urlpatterns +=[
-    url(r'^test/$', test_heandler, name='test'),
+    url(r'^test/$', TestHandler, name='test'),
 
 ]
 
