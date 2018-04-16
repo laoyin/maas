@@ -2,9 +2,6 @@
 # GNU Affero General Public License version 3 (see the file LICENSE).
 
 """Supporting infrastructure for Piston-based APIs in MAAS.
-   api权限控制，
-   1：token，从keystone中获取，
-   2：登录只验证返回的token是否过期
 """
 
 __all__ = [
