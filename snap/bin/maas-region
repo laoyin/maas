@@ -20,8 +20,10 @@ def set_umask():
 
 def run():
     # Allow maas-region to work in a snap.
+    # os.environ.setdefault(
+    #     "DJANGO_SETTINGS_MODULE", "maasserver.djangosettings.snappy")
     os.environ.setdefault(
-        "DJANGO_SETTINGS_MODULE", "maasserver.djangosettings.snappy")
+        "DJANGO_SETTINGS_MODULE", "maasserver.djangosettings.settings")
     os.environ.setdefault("MAAS_PATH", os.environ.get("SNAP"))
     os.environ.setdefault("MAAS_ROOT", os.environ.get("SNAP_DATA"))
     os.environ.setdefault(
