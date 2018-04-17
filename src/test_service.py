@@ -461,4 +461,11 @@ def run():
 
 
 if __name__ == "__main__":
+    os.environ.setdefault(
+        "DJANGO_SETTINGS_MODULE", "maasserver.djangosettings.settings")
+    os.environ.setdefault(
+        "/snap/bin/rackd_server_start.py", "/home/pan/qinyun/maas/src/rackd_server_start.py")
+    from maasserver.monkey import fix_django_big_auto_field
+    # fix django version problem
+    fix_django_big_auto_field()
     run()
