@@ -414,11 +414,11 @@ class RegionAllInOneServiceMaker(RegionMasterServiceMaker):
         self._ensureConnection()
 
         # Populate the region's event-loop with services.
-        loop.populate(master=True, all_in_one=True)
+        testloop.populate(master=True, all_in_one=True)
 
         # Return the eventloop's services to twistd, which will then be
         # responsible for starting them all.
-        return loop.services
+        return testloop.services
 
 
 # Regiond services that twisted could spawn.
