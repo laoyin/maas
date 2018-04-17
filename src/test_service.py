@@ -97,6 +97,13 @@ def make_PostgresListenerService():
     return PostgresListenerService()
 
 
+def make_ReverseDNSService(postgresListener):
+    from maasserver.regiondservices.reverse_dns import (
+        ReverseDNSService
+    )
+    return ReverseDNSService(postgresListener)
+
+
 class MAASServices(MultiService):
 
     def __init__(self, eventloop):
@@ -146,6 +153,11 @@ class RegionEventLoop:
             "only_on_master": True,
             "factory": make_PostgresListenerService,
             "requires": [],
+        },
+        "reverse-dns": {
+            "only_on_master": True,
+            "factory": make_ReverseDNSService,
+            "requires": ["postgres-listener-master"],
         },
     }
 
