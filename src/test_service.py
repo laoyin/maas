@@ -138,10 +138,15 @@ class RegionEventLoop:
             "factory": make_ActiveDiscoveryService,
             "requires": ["postgres-listener-master"],
         },
-        "postgres-listener-worker": {
+        # "postgres-listener-worker": {
+        #     "factory": make_PostgresListenerService,
+        #     "requires": [],
+        # },
+        "postgres-listener-master": {
+            "only_on_master": True,
             "factory": make_PostgresListenerService,
             "requires": [],
-        }
+        },
     }
 
     def __init__(self):
