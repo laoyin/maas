@@ -55,6 +55,7 @@ class LeaseSocketService(Service, DatagramProtocol):
         super(LeaseSocketService, self).startService()
         # Listen for packets from the `dhcpd.sock`.
         self.port = self.reactor.listenUNIXDatagram(self.address, self)
+        print(self.port)
 
         # Start the looping call to handle received notifications.
         self.done = self.processor.start(0.1, now=False)
