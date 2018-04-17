@@ -82,9 +82,6 @@ from twisted.internet.defer import (
 # Default port for regiond.
 DEFAULT_PORT = 5240
 
-logger = getLogger(__name__)
-
-
 reactor.addSystemEventTrigger(
     "before", "startup", disable_all_database_connections)
 
