@@ -141,10 +141,10 @@ class RegionEventLoop:
     """
 
     factories = {
-        "active-discovery": {
-            "factory": make_ActiveDiscoveryService,
-            "requires": ["postgres-listener-master"],
-        },
+        # "active-discovery": {
+        #     "factory": make_ActiveDiscoveryService,
+        #     "requires": ["postgres-listener-master"],
+        # },
         # "postgres-listener-worker": {
         #     "factory": make_PostgresListenerService,
         #     "requires": [],
