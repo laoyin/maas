@@ -238,6 +238,21 @@ class RegionEventLoop:
     def populateService(self, name, master=False, all_in_one=False):
         """Prepare a service."""
         factoryInfo = self.factories[name]
+        if not all_in_one:
+            if factoryInfo["only_on_master"] and not master:
+                raise ValueError(
+                    "Service '%s' cannot be created because it can only run "
+                    "on the master process." % name)
+            elif not factoryInfo["only_on_master"] and master:
+                raise ValueError(
+                    "Service '%s' cannot be created because it can only run "
+                    "on a worker process." % name)
+        else:
+            dont_run = factoryInfo.get('not_all_in_one', False)
+            if dont_run:
+                raise ValueError(
+                    "Service '%s' cannot be created because it can not run "
+                    "in the all-in-one process." % name)
         try:
             service = self.services.getServiceNamed(name)
         except KeyError:
@@ -268,7 +283,17 @@ class RegionEventLoop:
         """Prepare services."""
         self.master = master
         for name, item in self.factories.items():
-            self.populateService(name, master=master, all_in_one=all_in_one)
+            if all_in_one:
+                if not item.get('not_all_in_one', False):
+                    self.populateService(
+                        name, master=master, all_in_one=all_in_one)
+            else:
+                if item['only_on_master'] and master:
+                    self.populateService(
+                        name, master=master, all_in_one=all_in_one)
+                elif not item['only_on_master'] and not master:
+                    self.populateService(
+                        name, master=master, all_in_one=all_in_one)
 
     @asynchronous
     def prepare(self):
