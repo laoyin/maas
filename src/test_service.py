@@ -183,6 +183,16 @@ class RegionEventLoop:
     """
 
     factories = {
+        "rpc": {
+            "only_on_master": False,
+            "factory": make_RegionService,
+            "requires": ["rpc-advertise"],
+        },
+        "rpc-advertise": {
+            "only_on_master": False,
+            "factory": make_RegionAdvertisingService,
+            "requires": [],
+        },
         "active-discovery": {
             "factory": make_ActiveDiscoveryService,
             "requires": ["postgres-listener-master"],
@@ -214,16 +224,6 @@ class RegionEventLoop:
         "database-tasks": {
             "only_on_master": False,
             "factory": make_DatabaseTaskService,
-            "requires": [],
-        },
-        "rpc": {
-            "only_on_master": False,
-            "factory": make_RegionService,
-            "requires": ["rpc-advertise"],
-        },
-        "rpc-advertise": {
-            "only_on_master": False,
-            "factory": make_RegionAdvertisingService,
             "requires": [],
         },
     }
