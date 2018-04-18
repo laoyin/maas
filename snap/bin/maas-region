@@ -6,6 +6,8 @@ import grp
 import os
 import sys
 
+import sys;
+sys.path.append("../..")
 
 def check_user():
     # At present, only root should execute this.
