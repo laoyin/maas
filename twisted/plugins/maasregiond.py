@@ -4,7 +4,8 @@
 """Twisted Application Plugin for the MAAS Region daemon."""
 
 __all__ = []
-
+import sys;
+sys.path.append("../..")
 
 try:
     from maasserver.plugin import RegionServiceMaker

@@ -5,6 +5,9 @@
 
 __all__ = []
 
+import sys;
+sys.path.append("../..")
+
 
 try:
     from provisioningserver.plugin import ProvisioningServiceMaker
