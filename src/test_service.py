@@ -131,6 +131,10 @@ def make_StatusWorkerService(dbtasks):
     from metadataserver.api_twisted import StatusWorkerService
     return StatusWorkerService(dbtasks)
 
+def make_DatabaseTaskService():
+    from maasserver.utils import dbtasks
+    return dbtasks.DatabaseTasksService()
+
 class MAASServices(MultiService):
 
     def __init__(self, eventloop):
@@ -195,6 +199,11 @@ class RegionEventLoop:
             "only_on_master": False,
             "factory": make_StatusWorkerService,
             "requires": ["database-tasks"],
+        },
+        "database-tasks": {
+            "only_on_master": False,
+            "factory": make_DatabaseTaskService,
+            "requires": [],
         },
     }
 
