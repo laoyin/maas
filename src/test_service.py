@@ -135,6 +135,17 @@ def make_DatabaseTaskService():
     from maasserver.utils import dbtasks
     return dbtasks.DatabaseTasksService()
 
+def make_RegionService(advertiser):
+    # Import here to avoid a circular import.
+    from maasserver.rpc import regionservice
+    return regionservice.RegionService(advertiser)
+
+
+def make_RegionAdvertisingService():
+    # Import here to avoid a circular import.
+    from maasserver.rpc import regionservice
+    return regionservice.RegionAdvertisingService()
+
 class MAASServices(MultiService):
 
     def __init__(self, eventloop):
@@ -203,6 +214,16 @@ class RegionEventLoop:
         "database-tasks": {
             "only_on_master": False,
             "factory": make_DatabaseTaskService,
+            "requires": [],
+        },
+        "rpc": {
+            "only_on_master": False,
+            "factory": make_RegionService,
+            "requires": ["rpc-advertise"],
+        },
+        "rpc-advertise": {
+            "only_on_master": False,
+            "factory": make_RegionAdvertisingService,
             "requires": [],
         },
     }
