@@ -60,6 +60,7 @@ else:
         ProvisioningServiceMaker(
             "maas-rackd", "The MAAS Rack Controller daemon."))
 
+
 from logging import getLogger
 import os
 import socket
@@ -527,12 +528,6 @@ class RegionAllInOneServiceMaker(RegionMasterServiceMaker):
         return testloop.services
 
 
-# Regiond services that twisted could spawn.
-twistd_plugins.append(
-    RegionAllInOneServiceMaker(
-        "xingpan_test",
-        "xingpan test all server online"))
-
 
 class SOptions(ServerOptions):
     """Override the plugins path for the server options."""
@@ -540,6 +535,8 @@ class SOptions(ServerOptions):
     @staticmethod
     def _getPlugins(interface):
         return twistd_plugins
+
+
 
 
 def runService(service):
@@ -563,7 +560,13 @@ def runService(service):
 def run():
     """Run xingpan test"""
     import pdb
-    runService('xingpan_test')
+
+    # Regiond services that twisted could spawn.
+    twistd_plugins.append(
+        RegionAllInOneServiceMaker(
+            "maas-regiond-all",
+            "xingpan test all server online"))
+    runService('maas-regiond-all')
 
 
 if __name__ == "__main__":
