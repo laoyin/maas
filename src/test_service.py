@@ -193,11 +193,8 @@ class RegionEventLoop:
             "factory": make_RegionAdvertisingService,
             "requires": [],
         },
-        "active-discovery": {
-            "factory": make_ActiveDiscoveryService,
-            "requires": ["postgres-listener-master"],
-        },
         "postgres-listener-worker": {
+            "only_on_master": False,
             "factory": make_PostgresListenerService,
             "requires": [],
         },
