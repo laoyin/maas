@@ -97,8 +97,10 @@ class DatabaseTasksService(Service, object):
         :return: `None`
         """
         done = self.deferTask(func, *args, **kwargs)
-        done.addErrback(log.err, "Unhandled failure in database task.")
+        # done.addErrback(log.err, "Unhandled failure in database task.")
+        done.addErrback(checkerror, "Unhandled failure in database task.")
         return None
+
 
     @asynchronous
     def syncTask(self):
@@ -170,3 +172,10 @@ class DatabaseTasksService(Service, object):
         # Execute all remaining tasks.
         while len(queue.pending) != 0:
             yield queue.get().addCallback(execute)
+
+
+
+def checkerror(error):
+    import pdb
+    pdb.set_trace()
+    print(str(error))
