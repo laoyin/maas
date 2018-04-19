@@ -5,7 +5,9 @@
 set -e
 
 # Get the current snap mode.
-SNAP_MODE=`cat $SNAP_COMMON/snap_mode`
+#SNAP_MODE=`cat $SNAP_COMMON/snap_mode`
+SNAP_DATA = "/etc/maas"
+SNAP_MODE = 'all'
 
 if [ "$SNAP_MODE" = 'all' -a ! -e "$SNAP_DATA/rackd.conf" ]
 then
@@ -15,13 +17,16 @@ EOF
 fi
 
 # Remove the dhcp configuration so its not started unless needed.
-rm -f "$SNAP_DATA/var/lib/maas/dhcpd.sock"
-rm -f "$SNAP_DATA/var/lib/maas/dhcpd.conf"
-rm -f "$SNAP_DATA/var/lib/maas/dhcpd6.conf"
+rm -f "/var/lib/maas/dhcpd.sock"
+rm -f "/var/lib/maas/dhcpd.conf"
+rm -f "/var/lib/maas/dhcpd6.conf"
 
 # Configure MAAS to work in a snap.
-export MAAS_PATH="$SNAP"
-export MAAS_ROOT="$SNAP_DATA"
+#export MAAS_PATH="$SNAP"
+#export MAAS_ROOT="$SNAP_DATA"
+
+export MAAS_PATH="/"
+export MAAS_ROOT="/etc/maas/"
 export MAAS_CLUSTER_CONFIG="$SNAP_DATA/rackd.conf"
 
 # Setup language and perl5 correctly. Needed by tgt-admin written in
