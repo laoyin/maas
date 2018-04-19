@@ -177,5 +177,5 @@ class DatabaseTasksService(Service, object):
 
 def checkerror(error):
     import pdb
-    pdb.set_trace()
+    # pdb.set_trace()
     print(str(error))

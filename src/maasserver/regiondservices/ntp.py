@@ -119,5 +119,5 @@ class _Configuration:
 
 def checkerror(error=None):
     import pdb
-    pdb.set_trace()
+    # pdb.set_trace()
     print(error)
