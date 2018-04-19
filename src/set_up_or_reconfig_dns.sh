@@ -6,11 +6,11 @@ edit_named_options() {
     # Remove any existing MAAS-related include line from
     # /etc/bind/named.conf.local, then re-add it.
     sed -i '/^include\s.*maas/d' /etc/bind/named.conf.local
-    maas-region get_named_conf --edit --config_path /etc/bind/named.conf.local
+    python3 manage.py get_named_conf --edit --config_path /etc/bind/named.conf.local
 
     # Add a line in /etc/bind/named.conf.options that includes the
     # /etc/named/maas/named.conf.options.inside.maas file.
-    maas-region edit_named_options --config-path /etc/bind/named.conf.options
+    python3 manage.py edit_named_options --config-path /etc/bind/named.conf.options
 }
 
 fix_dns_permissions() {
