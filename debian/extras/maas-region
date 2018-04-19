@@ -40,6 +40,8 @@ def set_umask():
 
 
 def run():
+    import sys
+    sys.path.append("../../src/")
     # Force the production MAAS Django configuration.
     os.environ.setdefault(
         "DJANGO_SETTINGS_MODULE", "maasserver.djangosettings.settings")
@@ -56,7 +58,7 @@ def main():
             "removed in a future version. From now on please use 'maas-region' "
             "instead.\n")
     check_user()
-    set_group()
+    # set_group()
     set_umask()
     run()
 
