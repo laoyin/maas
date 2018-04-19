@@ -311,6 +311,8 @@ def sudo_write_file(filename, contents, mode=0o644):
 
     :type contents: `bytes`.
     """
+    import pdb
+    pdb.set_trace()
     from provisioningserver.config import is_dev_environment
     if not isinstance(contents, bytes):
         raise TypeError("Content must be bytes, got: %r" % (contents, ))
