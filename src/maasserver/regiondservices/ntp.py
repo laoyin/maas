@@ -41,8 +41,6 @@ class RegionNetworkTimeProtocolService(TimerService):
 
     def _tryUpdate(self):
         """Update the NTP server running on this host."""
-        import pdb
-        pdb.set_trace()
         d = deferToDatabase(self._getConfiguration)
         d.addCallback(self._maybeApplyConfiguration)
         # d.addErrback(log.err, "Failed to update NTP configuration.")
