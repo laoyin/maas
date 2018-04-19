@@ -6,8 +6,6 @@ set -e
 
 # Get the current snap mode.
 #SNAP_MODE=`cat $SNAP_COMMON/snap_mode`
-SNAP_DATA = "/etc/maas"
-SNAP_MODE = 'all'
 
 if [ "$SNAP_MODE" = 'all' -a ! -e "$SNAP_DATA/rackd.conf" ]
 then
@@ -22,11 +20,9 @@ rm -f "/var/lib/maas/dhcpd.conf"
 rm -f "/var/lib/maas/dhcpd6.conf"
 
 # Configure MAAS to work in a snap.
-#export MAAS_PATH="$SNAP"
-#export MAAS_ROOT="$SNAP_DATA"
+export MAAS_PATH="$SNAP"
+export MAAS_ROOT="$SNAP_DATA"
 
-export MAAS_PATH="/"
-export MAAS_ROOT="/etc/maas/"
 export MAAS_CLUSTER_CONFIG="$SNAP_DATA/rackd.conf"
 
 # Setup language and perl5 correctly. Needed by tgt-admin written in
@@ -38,6 +34,16 @@ export LANGUAGE="C.UTF-8"
 export LC_ALL="C.UTF-8"
 export LANG="C.UTF-8"
 export PERL5LIB="$SNAP/usr/lib/x86_64-linux-gnu/perl/5.22:$SNAP/usr/share/perl/5.22:$SNAP/usr/share/perl5"
+
+# Configure the rack's UUID to match sampledata, and also use a high
+# port for TFTP to match this branch's etc/services.
+port=${MAAS_TFTP_PORT:-5244}
+python3 start_rack.py config \
+    --uuid adfd3977-f251-4f2c-8d61-745dbd690bf2 \
+    --tftp-port $port
+
+# Wait for the installation of the shared-secret.
+until python3 start_rack.py check-for-shared-secret; do sleep 2; done
 
 # Run the rackd.
 exec $SNAP/usr/bin/twistd3 --logger=provisioningserver.logger.EventLogger --nodaemon --pidfile= maas-rackd
