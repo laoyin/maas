@@ -31,11 +31,10 @@ whitelist = {
 # with MAAS_ROOT, if defined. Check real and effective UIDs to be super extra
 # paranoid (only the latter actually matters).
 if os.getuid() != 0 and os.geteuid() != 0:
-    root = os.environ.get("MAAS_ROOT")
+    root = os.environ.get("MAAS_ROOT", "")
     if root is not None:
         whitelist = {
-            os.path.abspath(root + os.sep + path)
-            for path in whitelist
+            os.path.abspath(root + os.sep + path) for path in whitelist
         }
 
 
