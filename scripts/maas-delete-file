@@ -12,6 +12,8 @@ import argparse
 import os
 import pipes
 
+import sys
+sys.path.append("../src")
 from provisioningserver.utils.fs import atomic_delete
 
 
