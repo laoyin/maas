@@ -118,4 +118,5 @@ class _Configuration:
 def checkerror(error=None):
     import pdb
     # pdb.set_trace()
+    print("错误啦，错误啦")
     print(error)
