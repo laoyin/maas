@@ -295,7 +295,9 @@ def _with_dev_python(*command):
     from provisioningserver.config import is_dev_environment
     if is_dev_environment():
         from maastesting import root
-        interpreter = os.path.join(root, "bin", "py")
+        # 增加python virtual环境， 这里就直接使用python3
+        # interpreter = os.path.join(root, "bin", "py")
+        interpreter = "python3"
         command = interpreter, *command
     return command
 
@@ -311,8 +313,6 @@ def sudo_write_file(filename, contents, mode=0o644):
 
     :type contents: `bytes`.
     """
-    import pdb
-    pdb.set_trace()
     from provisioningserver.config import is_dev_environment
     if not isinstance(contents, bytes):
         raise TypeError("Content must be bytes, got: %r" % (contents, ))
