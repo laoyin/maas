@@ -131,6 +131,8 @@ def _write_temp_file(content, filename):
 
 
 def atomic_write(content, filename, overwrite=True, mode=0o600):
+    import pdb
+    pdb.set_trace()
     """Write `content` into the file `filename` in an atomic fashion.
 
     This requires write permissions to the directory that `filename` is in.
