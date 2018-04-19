@@ -298,9 +298,6 @@ def boot_merge(destination, additions, filters=None):
 def download_image_descriptions(
         path, keyring=None, user_agent=None, validate_products=True):
     """Download image metadata from upstream Simplestreams repo.
-
-    import pdb
-    pdb.set_trace()
     :param path: The path to a Simplestreams repo.
     :param keyring: Optional keyring for verifying the repo's signatures.
     :param user_agent: Optional user agent string for downloading the image
