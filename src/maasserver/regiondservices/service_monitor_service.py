@@ -39,16 +39,23 @@ class ServiceMonitorService(TimerService, object):
         """Monitors all of the external services and makes sure they
         stay running.
         """
-        if is_dev_environment():
-            log.msg(
-                "Skipping check of services; they're not running under "
-                "the supervision of systemd.")
-        else:
-            d = service_monitor.ensureServices()
-            d.addCallback(self._updateDatabase)
-            d.addErrback(
-                log.err, "Failed to monitor services and update database.")
-            return d
+        # @begin yxp test
+        # if is_dev_environment():
+        #     log.msg(
+        #         "Skipping check of services; they're not running under "
+        #         "the supervision of systemd.")
+        # else:
+        #     d = service_monitor.ensureServices()
+        #     d.addCallback(self._updateDatabase)
+        #     d.addErrback(
+        #         log.err, "Failed to monitor services and update database.")
+        #     return d
+        # @end xyp test
+        d = service_monitor.ensureServices()
+        d.addCallback(self._updateDatabase)
+        d.addErrback(
+            log.err, "Failed to monitor services and update database.%s"%str(log))
+        return d
 
     @inlineCallbacks
     def _updateDatabase(self, services):
