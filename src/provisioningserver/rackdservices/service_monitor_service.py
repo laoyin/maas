@@ -65,16 +65,23 @@ class ServiceMonitorService(TimerService, object):
         """Monitors all of the external services and makes sure they
         stay running.
         """
-        if is_dev_environment():
-            log.msg(
-                "Skipping check of services; they're not running under "
-                "the supervision of systemd.")
-        else:
-            d = service_monitor.ensureServices()
-            d.addCallback(self._updateRegion)
-            d.addErrback(
-                log.err, "Failed to monitor services and update region.")
-            return d
+        # @begin test yxp
+        # if is_dev_environment():
+        #     log.msg(
+        #         "Skipping check of services; they're not running under "
+        #         "the supervision of systemd.")
+        # else:
+        #     d = service_monitor.ensureServices()
+        #     d.addCallback(self._updateRegion)
+        #     d.addErrback(
+        #         log.err, "Failed to monitor services and update region.")
+        #     return d
+        # @end test yxp
+        d = service_monitor.ensureServices()
+        d.addCallback(self._updateRegion)
+        d.addErrback(
+            del_error(faulir), "Failed to monitor services and update region.")
+        return d
 
     @inlineCallbacks
     def _updateRegion(self, services):
@@ -110,3 +117,7 @@ class ServiceMonitorService(TimerService, object):
                 "status_info": status_info,
             })
         return msg_services
+
+
+def del_error(failure):
+    print(failure.getErrorMessage())
