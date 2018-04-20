@@ -44,8 +44,8 @@ def _get_local_timezone(tzfilename='/etc/timezone'):
 ENABLE_HA = True if int(os.environ.get('ENABLE_HA', 0)) == 1 else False
 
 # Production mode.
-DEBUG = False
-
+# DEBUG = False
+DEBUG = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
