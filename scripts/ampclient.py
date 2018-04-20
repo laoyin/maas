@@ -6,7 +6,7 @@
 __all__ = []
 
 import sys
-
+sys.path.append("../src")
 from provisioningserver.rpc.cluster import ListBootImages
 from provisioningserver.rpc.region import ReportBootImages
 from twisted.internet import reactor
