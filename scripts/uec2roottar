@@ -7,7 +7,8 @@
 This requires root privileges, because it needs to loop-mount the image file
 in order to read its contents.
 """
-
+import sys
+sys.path.append("../src")
 from provisioningserver.import_images import uec2roottar
 
 
