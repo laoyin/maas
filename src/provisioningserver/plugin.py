@@ -79,12 +79,14 @@ class ProvisioningServiceMaker:
     def _makeTFTPService(
             self, tftp_root, tftp_port, rpc_service):
         """Create the dynamic TFTP service."""
+        print("hi, iam here")
         from provisioningserver.rackdservices.tftp import TFTPService
         tftp_service = TFTPService(
             resource_root=tftp_root, port=tftp_port,
             client_service=rpc_service)
         tftp_service.setName("tftp")
-
+        print("tftp setup, panpanapan")
+        print(tftp_port)
         # *** EXPERIMENTAL ***
         # https://code.launchpad.net/~allenap/maas/tftp-offload/+merge/312146
         # If the TFTP port has been set to zero, use the experimental offload
