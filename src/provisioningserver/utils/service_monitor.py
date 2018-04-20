@@ -377,7 +377,7 @@ class ServiceMonitor:
         if extra_opts is not None:
             cmd.extend(extra_opts)
         cmd.append(service_name)
-
+        print("".join(cmd))
         def decode(result):
             out, err, code = result
             return code, out.decode("utf-8"), err.decode("utf-8")
@@ -469,8 +469,8 @@ class ServiceMonitor:
             if line.startswith("Loaded"):
                 load_status = line.split()[1]
                 if load_status != "loaded":
-                    raise ServiceUnknownError("'%s' is unknown to systemd." % (
-                        service.service_name))
+                    raise ServiceUnknownError("'%s' is unknown to systemd. load_status为%s" % (
+                        service.service_name, str(load_status)))
             if line.startswith("Active"):
                 active_split = line.split(' ', 2)
                 active_state, process_state = (
