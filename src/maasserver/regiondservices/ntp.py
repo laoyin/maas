@@ -43,8 +43,8 @@ class RegionNetworkTimeProtocolService(TimerService):
         """Update the NTP server running on this host."""
         d = deferToDatabase(self._getConfiguration)
         d.addCallback(self._maybeApplyConfiguration)
-        # d.addErrback(log.err, "Failed to update NTP configuration.")
-        d.addCallback(checkerror, "Failed to update NTP configuration.")
+        d.addErrback(log.err, "Failed to update NTP configuration. %s"%str(log))
+        # d.addCallback(checkerror, "Failed to update NTP configuration.")
         return d
 
     @synchronous
