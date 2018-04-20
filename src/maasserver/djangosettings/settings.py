@@ -356,3 +356,8 @@ patch_get_script_prefix()
 
 # Fix crooked settings.
 fix_up_databases(DATABASES)
+
+
+print(DEBUG)
+print("debug %s"%str(DEBUG))
+print(DEBUG)
