@@ -80,7 +80,7 @@ class ServiceMonitorService(TimerService, object):
         d = service_monitor.ensureServices()
         d.addCallback(self._updateRegion)
         d.addErrback(
-            del_error(faulir), "Failed to monitor services and update region.")
+            del_error, "Failed to monitor services and update region.")
         return d
 
     @inlineCallbacks
