@@ -1364,6 +1364,8 @@ def _handle_import_failures(failure):
         # traceback already, but it makes sense to be consistent.
         ExternalProcessError.upgrade(failure.value)
 
+    import pdb
+    pdb.set_trace()
     log.err(failure, "Importing boot resources failed.")
 
 
