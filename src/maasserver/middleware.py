@@ -62,6 +62,9 @@ from provisioningserver.utils.shell import ExternalProcessError
 # responses.
 RETRY_AFTER_SERVICE_UNAVAILABLE = 10
 
+PreYunShouUrl = "yunshou"
+
+YunShouLogin = "/yunshou/login/"
 
 class AccessMiddleware:
     """Protect access to views.
@@ -104,6 +107,19 @@ class AccessMiddleware:
         self.login_url = reverse('login')
 
     def process_request(self, request):
+
+        # 云首keystone，登录用户url检查
+        if PreYunShouUrl in request.path_info:
+            try:
+                user = login_check(request)
+                request.user = user
+                return None
+            except Exception as e:
+                return HttpResponseForbidden(json.dumps({
+                    "ret":e.error_code,
+                    "info":e.msg
+                }))
+
         # Public urls.
         if self.public_urls.match(request.path_info):
             return None
@@ -120,6 +136,14 @@ class AccessMiddleware:
                         return HttpResponseRedirect(index_path)
                 return None
 
+
+        def process_response(self, request, response):
+            # 云首keystone，登录用户url检查
+            if PreYunShouUrl in request.path_info:
+                response['Content-Type'] = 'application/json'
+                if request.user:
+                    response['X-Subject-Token'] = user.token
+                    return response
 
 class ExternalComponentsMiddleware:
     """Middleware to check external components at regular intervals."""
@@ -426,3 +450,30 @@ class CSRFHelperMiddleware:
             # request is OAuth-authenticated).
             request.csrf_processing_done = True
         return None
+
+# @test yxp
+class keystone:
+
+    def __init__(self, api_key):
+        self.token = api_key
+
+    @classmethod
+    def validate(cls, api_key):
+        user = cls(api_key)
+        return "vsersion", user
+
+
+#  keystone 登录
+def login_check(request):
+    from maasserver.exception.exception import UserException
+    from maasserver.exception.exception import AuthException
+    # from guardian.keystone import authentication as keystone
+    api_key = request.headers.get('X-Subject-Token')
+    if not api_key:
+        raise UserException(msg="request forbidden")
+    v, user = keystone.validate(api_key)
+    if v:
+        user.token = api_key
+    else:
+        raise AuthException(error_code=401, msg="AUTH FAILED")
+    return user
